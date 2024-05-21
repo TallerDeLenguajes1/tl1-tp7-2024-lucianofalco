@@ -1,105 +1,77 @@
-﻿// See https://aka.ms/new-console-template for more information
-using EspacionCalculadora;
+﻿using Empresa;
 
-internal class Program
+Empleado Empleado1 = new Empleado();
+
+Console.WriteLine();
+Empleado1.Nombre1 = "Favio";
+Empleado1.Apellido1 = "Leguina";
+Empleado1.Cargo1 = Cargos.Administrativo;
+Empleado1.EstadoCivil1 = 'S';
+Empleado1.FechaDeNac = new DateTime(1985, 5, 23);
+Empleado1.FechaDeIngreso = new DateTime(2005, 3, 15);
+Empleado1.SueldoBasico1 = 100000;
+//Empleado1.MostrarInformacion();
+
+Console.WriteLine();
+Empleado Empleado2 = new Empleado();
+Empleado2.Nombre1 = "Sheyla";
+Empleado2.Apellido1 = "Astorga";
+Empleado2.Cargo1 = Cargos.Ingeniero;
+Empleado2.EstadoCivil1 = 'C';
+Empleado2.FechaDeNac = new DateTime(1999, 1, 10);
+Empleado2.FechaDeIngreso = new DateTime(2015, 9, 11);
+Empleado2.SueldoBasico1 = 100000;
+//Empleado2.MostrarInformacion();
+
+Console.WriteLine();
+Empleado Empleado3 = new Empleado();
+Empleado3.Nombre1 = "Luz";
+Empleado3.Apellido1 = "Arganaraz";
+Empleado3.Cargo1 = Cargos.Ingeniero;
+Empleado3.EstadoCivil1 = 'S';
+Empleado3.FechaDeNac = new DateTime(1972, 12, 21);
+Empleado3.FechaDeIngreso = new DateTime(2015, 9, 11);
+Empleado3.SueldoBasico1 = 100000;
+//Empleado3.MostrarInformacion();
+double montoTotalSalarios = 0;
+
+Empleado[] empleados = new Empleado[3];
+empleados[0] = Empleado1;
+empleados[1] = Empleado2;
+empleados[2] = Empleado3;
+
+foreach (Empleado empleado in empleados)
 {
-    private static void Main(string[] args)
+    empleado.MostrarInformacion();
+    Console.WriteLine();
+}
+
+foreach (Empleado empleado in empleados)
+{
+    montoTotalSalarios += empleado.CalcularSalario();
+}
+
+Console.WriteLine($"Total salarios : {montoTotalSalarios}");
+
+Empleado empleadoProximoAJubilarse = empleados[0];
+int aniosProximoAJubilarse = empleadoProximoAJubilarse.CalcularAnioJub();
+foreach (Empleado empleado in empleados)
+{
+    int aniosParaJubilacion = empleado.CalcularAnioJub();
+    if (aniosParaJubilacion < aniosProximoAJubilarse)
     {
-        Calculadora nuevaCalc = new Calculadora();
-        int opcion = 0;
-        int numero = 0;
-        while (opcion != 5)
-        { // Cambia este número al número máximo de opciones en tu menú
-            {
-                Console.WriteLine();
-                Console.WriteLine("Menú:");
-                Console.WriteLine("1. Sumar");
-                Console.WriteLine("2. Restar");
-                Console.WriteLine("3. Multiplicar");
-                Console.WriteLine("4. Dividir");
-                Console.WriteLine("5. Salir");
-                Console.Write("Elige una opción: ");
-
-                if (!int.TryParse(Console.ReadLine(), out opcion))
-                {
-                    Console.WriteLine("Por favor, introduce un número válido.");
-                    continue;
-                }
-
-                switch (opcion)
-                {
-                    case 1:
-                        Console.WriteLine("Selecciones el numero a Sumar");
-                        if (!int.TryParse(Console.ReadLine(), out numero))
-                        {
-                            Console.WriteLine("Por favor, introduce un número válido.");
-                            continue;
-                        }
-                        else
-                        {
-                            nuevaCalc.Sumar(numero);
-                            Console.WriteLine();
-                            Console.WriteLine($"Resultado: {nuevaCalc.Resultado}");
-                        }
-                        break;
-
-                    case 2:
-                        Console.WriteLine("Selecciones el numero a Restar");
-                        if (!int.TryParse(Console.ReadLine(), out numero))
-                        {
-
-                            Console.WriteLine("Por favor, introduce un número válido.");
-                            Console.WriteLine();
-
-                            continue;
-                        }
-                        else
-                        {
-                            nuevaCalc.Restar(numero);
-                            Console.WriteLine();
-                            Console.WriteLine($"Resultado: {nuevaCalc.Resultado}");
-                        }
-                        break;
-
-                    case 3:
-                        Console.WriteLine("Selecciones el numero a Multiplicar");
-                        if (!int.TryParse(Console.ReadLine(), out numero))
-                        {
-                            Console.WriteLine("Por favor, introduce un número válido.");
-                            continue;
-                        }
-                        else
-                        {
-                            nuevaCalc.Multiplicar(numero);
-                            Console.WriteLine();
-                            Console.WriteLine($"Resultado: {nuevaCalc.Resultado}");
-                        }
-                        break;
-
-                    case 4:
-                        Console.WriteLine("Selecciones el numero a Dividir");
-                        if (!int.TryParse(Console.ReadLine(), out numero))
-                        {
-                            Console.WriteLine("Por favor, introduce un número válido.");
-                            continue;
-                        }
-                        else
-                        {
-                            nuevaCalc.Dividir(numero);
-                            Console.WriteLine();
-                            Console.WriteLine($"Resultado: {nuevaCalc.Resultado}");
-                        }
-                        break;
-
-                    case 5:
-                        Console.WriteLine("Saliendo del programa...");
-                        break;
-                    default:
-                        Console.WriteLine("Opción no válida. Por favor, elige una opción válida.");
-                        break;
-                }
-            }
-        }
-        Console.WriteLine($"Resultado Final {nuevaCalc.Resultado}");
+        empleadoProximoAJubilarse = empleado;
+        aniosProximoAJubilarse = aniosParaJubilacion;
     }
 }
+
+// Mostrar los datos del empleado más próximo a jubilarse
+Console.WriteLine("Datos del empleado más próximo a jubilarse:");
+empleadoProximoAJubilarse.MostrarInformacion();
+
+
+
+
+
+
+
